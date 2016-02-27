@@ -40,8 +40,7 @@
 			c5.1,8.3,13.1,10.4,21.4,14.3c11.2,5.2,12,8.9,19,18.3C190.9,141.7,173.8,144.9,167.5,142.1z" />
 	</svg>
 
-
-	<script src="vector-morph.js"></script>
+	<script src="bundle.js"></script>
 
 	<script>
 
@@ -49,8 +48,11 @@
 		var rect = document.getElementById('rect');
 		var circle = document.getElementById('circle');
 
-		//var myMorph = Vector.morph(dragon, rect);
-		console.log('Vector:', Vector || 'nope!');
+		var validated = Vector.validate(dragon, rect);
+		var morphed = Vector.morph(dragon, rect);
+
+		console.info('***', validated, morphed, '***');
+
 
 	</script>
 

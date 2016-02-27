@@ -1,5 +1,5 @@
 System.config({
-  baseURL: "dist/",
+  baseURL: "./",
   defaultJSExtensions: true,
   transpiler: "babel",
   babelOptions: {

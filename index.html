@@ -40,19 +40,11 @@
 			c5.1,8.3,13.1,10.4,21.4,14.3c11.2,5.2,12,8.9,19,18.3C190.9,141.7,173.8,144.9,167.5,142.1z" />
 	</svg>
 
-
-	<script data-main="src/main" src="src/main.js"></script>
+	<script src="jspm_packages/system.js"></script>
+	<script src="jspm_config.js"></script>
 
 	<script>
-
-		console.info(window, window.Vector || 'nope!');
-
-		var dragon = document.getElementById('dragonPath');
-		var rect = document.getElementById('rect');
-		var circle = document.getElementById('circle');
-
-		var myMorph = Vector.morph(dragon, rect);
-
+		System.import('src/main.js');
 	</script>
 
 </body>
