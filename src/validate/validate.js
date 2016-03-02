@@ -30,9 +30,10 @@ export default function() {
 	}
 
 	function argType(args) {
+        var types = Object.keys(Types).map((type) => Types[type].name);
 		args.forEach(function(node) {
-			if (Types.indexOf(node.nodeName) === -1) {
-				throw 'Element must be of type ' + Types;
+			if (types.indexOf(node.nodeName) === -1) {
+				throw 'Element must be of type ' + types;
 			}
 		});
 		return args;

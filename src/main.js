@@ -4,21 +4,29 @@ import Methods from './settings/methods';
 import Validate from './validate/validate';
 import Morph from './morph/morph';
 
-export default (function() {
-	var context = (window || this);
+const library = {
+    name: Name,
+    version: '0.0.0',
+    morph: Morph
+}
 
-	// Bind [name] to global context
-	var module = context[Name] = {};
+Methods.forEach(function(method) {
+    library[method.name] = method.src
+});
 
-	module.validate = Validate;
-	module.morph = Morph;
-	console.log(module.morph, Methods);
+window[Name] = (function() { return library; })();
 
-})();
+// testing
+console.log('* global object:', Vector);
 
 var dragon = document.getElementById('dragonPath');
-var rect = document.getElementById('rect');
 var circle = document.getElementById('circle');
+var rect = document.getElementById('rect');
 
-var validated = Vector.validate(dragon, rect);
-var myMorph = Vector.morph(dragon, rect);
+var myMorph = Vector
+    .morph(dragon, circle)
+    .set('timing', 'slow');
+    
+
+
+myMorph.start();
