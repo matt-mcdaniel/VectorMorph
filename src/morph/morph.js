@@ -1,22 +1,20 @@
-import Methods from '../settings/methods.js';
 import Validate from '../validate/validate';
-import Append from '../append/append';
+import { append } from '../append/append';
+import { circleToPath } from '../circleToPath/circleToPath';
+import { remove } from '../remove/remove';
+import { change } from '../change/change';
 
 export default function() {
 	if (!Validate(arguments)) { return false; }
     
     const nodes = [].slice.call(arguments);
+    console.log(nodes);
     
-    const morphObject = { nodes };
+    let newPath = circleToPath(nodes[0]);
     
-    Methods.forEach(function(method) {
-        morphObject[method.name] = method.src;
-    });
-    
-    
-    Append(morphObject.nodes);
-    console.info('morphObject:', morphObject);
-    
-    return morphObject;
+    append(nodes[0], newPath);
+    remove(nodes[0]);
+    let thing = change(newPath, nodes[1]);
+    console.log(thing);
 
 };

@@ -6,13 +6,15 @@ const slicePx = Helpers.slicePx;
 const setAttr = Helpers.setAttr;
 const clean = Helpers.clean;
 
-export default function(circle) {
+const circleToPath = function(circle) {
     
     let attrs = [].slice.call(circle.attributes);
     
     let cx = slicePx(circle.getAttribute('cx'));
     var cy = slicePx(circle.getAttribute('cy'));
     var r = slicePx(circle.getAttribute('r'));
+    var fill = circle.getAttribute('fill');
+    var style = circle.getAttribute('style');
 
     let d = `
         M ${cx} ${cy}
@@ -26,8 +28,10 @@ export default function(circle) {
     setAttr(path, 'd', clean(d));
     setAttr(path, 'x', 0);
     setAttr(path, 'y', 0);
-    setAttr(path, 'stroke', 'blue');
-    setAttr(path, 'stroke-width', 2);
+    setAttr(path, 'fill', fill);
+    setAttr(path, 'style', style);
     
     return path;
 }
+
+export { circleToPath };
