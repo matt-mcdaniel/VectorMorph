@@ -1,37 +1,25 @@
-import Constants from '../settings/constants';
-import Helpers from '../utility/helpers';
+import { svgns, slicePx, setAttr, clean } from '../utility/helpers';
+import { append } from '../append/append';
+import { remove } from '../remove/remove';
 
-const svgns = Constants.svgns;
-const slicePx = Helpers.slicePx;
-const setAttr = Helpers.setAttr;
-const clean = Helpers.clean;
+function circleToPath(circle) {
 
-const circleToPath = function(circle) {
-    
-    let attrs = [].slice.call(circle.attributes);
-    
-    let cx = slicePx(circle.getAttribute('cx'));
-    var cy = slicePx(circle.getAttribute('cy'));
-    var r = slicePx(circle.getAttribute('r'));
-    var fill = circle.getAttribute('fill');
-    var style = circle.getAttribute('style');
+	let cx = slicePx(circle.getAttribute('cx'));
+	var cy = slicePx(circle.getAttribute('cy'));
+	var r = slicePx(circle.getAttribute('r'));
+	var fill = circle.getAttribute('fill');
+	var style = circle.getAttribute('style');
 
-    let d = `
-        M ${cx} ${cy}
-        m ${-r}, 0
-        a ${r},${r} 0 1,0 ${(r * 2)},0
-        a ${r},${r} 0 1,0 ${-(r * 2)},0
-    `;
-    
-    // create element
-    let path = document.createElementNS(svgns, 'path');
-    setAttr(path, 'd', clean(d));
-    setAttr(path, 'x', 0);
-    setAttr(path, 'y', 0);
-    setAttr(path, 'fill', fill);
-    setAttr(path, 'style', style);
-    
-    return path;
+	let pathObj = document.createElementNS(svgns, 'path');
+	pathObj.setAttribute("d", "M" + (cx - r).toFixed(3) + " " + cy.toFixed(3) + " A" + r.toFixed(3) + " " + r.toFixed(3) + " 0 1 0 " + (cx + r).toFixed(3) + " " + cy.toFixed(3) + " A" + r.toFixed(3) + " " + r.toFixed(3) + " 0 1 0 " + (cx - r).toFixed(3) + " " + cy.toFixed(3) + " Z");
+	pathObj.setAttribute("style", style);
+	pathObj.setAttribute("fill", fill);
+
+	append(circle, pathObj);
+	remove(circle);
+
+	return pathObj;
+
 }
 
 export { circleToPath };

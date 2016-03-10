@@ -1,6 +1,4 @@
-import helpers from '../utility/helpers';
-
-var setAttr = helpers.setAttr;
+import { setAttr } from '../utility/helpers';
 
 // https://github.com/popkinj/polymorph/blob/master/polymorph.js
 let change = function(from, to){
@@ -74,16 +72,15 @@ let change = function(from, to){
       return it.x + "," + it.y;
     });
   };
-  console.log('f:', from);
+
   var fromPath = from.getAttribute('d');
   var toPath = to.getAttribute('d');
   measures = getMeasures(fromPath);
   newShape = transpose(measures, toPath);
   svg.parentNode.removeChild(svg);
-  
+
   var newD = "M" + newShape.join('L') + "Z";
-  
-  setAttr(from, 'd', newD);
+  return newD;
 };
 
 export { change };

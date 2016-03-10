@@ -1,11 +1,11 @@
-import Circle from '../circleToPath/circleToPath';
+import circle from '../circleToPath/circleToPath';
 
 let empty = function() {};
 
 export default {
     circle: {
         name: 'circle',
-        convertToPath: Circle
+        convertToPath: circle
     },
     ellipse: {
         name: 'ellipse',

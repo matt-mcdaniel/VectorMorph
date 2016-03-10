@@ -11,16 +11,14 @@ function clean(str) {
     var regEx = [
         [/\\n/gi, ''],
     ];
-    
+
     let reduced = regEx.reduce(function(acc, reg) {
         return acc.replace(reg[0], reg[1]);
     }, str);
-    
+
     return reduced;
 }
 
-export default {
-    slicePx: slicePx,
-    setAttr: setAttr,
-    clean: clean
-}
+const svgns = 'http://www.w3.org/2000/svg';
+
+export { slicePx, setAttr, clean, svgns };
